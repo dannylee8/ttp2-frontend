@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      username: '',
       email: '',
       password: '',
       errors: ''
-     };
+    };
   }
   componentWillMount() {
     return this.props.loggedInStatus ? this.redirect() : null
@@ -22,9 +22,8 @@ handleChange = (event) => {
   };
 handleSubmit = (event) => {
     event.preventDefault()
-    const {username, email, password} = this.state
+    const {email, password} = this.state
 let user = {
-      username: username,
       email: email,
       password: password
     }
@@ -58,40 +57,37 @@ handleErrors = () => {
     )
   }
 render() {
-    const {username, email, password} = this.state
+    const {email, password} = this.state
 return (
-      <div>
-        <h1>Log In</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            placeholder="username"
-            type="text"
-            name="username"
-            value={username}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="email"
-            type="text"
-            name="email"
-            value={email}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="password"
-            type="password"
-            name="password"
-            value={password}
-            onChange={this.handleChange}
-          />
-          <button placeholder="submit" type="submit">
-            Log In
-          </button>
-          <div>
-            or <Link to='/signup'>sign up</Link>
+      <div className='center'>
+        <div id="login_div">
+          <h4>Sign In</h4>
+          <form class="w3-container" onSubmit={this.handleSubmit}>
+            <input
+              placeholder="email"
+              className="w3-input w3-border w3-light-grey"
+              type="text"
+              name="email"
+              value={email}
+              onChange={this.handleChange}
+            />
+            <br></br>
+              <input
+                placeholder="password"
+                className="w3-input w3-border w3-light-grey"
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+              />
+              <button className="w3-btn w3-blue-grey" placeholder="submit" type="submit">
+                Log In
+              </button>
+            <div>
+              or <Link to='/signup'>register</Link>
+            </div>
+            </form>
           </div>
-          
-          </form>
           <div>
           {
             this.state.errors ? this.handleErrors() : null

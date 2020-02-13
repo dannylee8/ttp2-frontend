@@ -4,17 +4,20 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Home from './components/Home'
 import Login from './components/registrations/Login'
 import Signup from './components/registrations/Signup'
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
       isLoggedIn: false,
       user: {}
-     };
+    };
   }
+
 componentDidMount() {
     this.loginStatus()
   }
+
 loginStatus = () => {
     axios.get('http://localhost:3001/logged_in', {withCredentials: true})
     .then(response => {
@@ -26,21 +29,24 @@ loginStatus = () => {
     })
     .catch(error => console.log('api errors:', error))
   }
+
 handleLogin = (data) => {
     this.setState({
       isLoggedIn: true,
       user: data.user
     })
   }
+
 handleLogout = () => {
     this.setState({
     isLoggedIn: false,
     user: {}
     })
   }
+
 render() {
     return (
-      <div>
+      <div id='wrapper'>
         <BrowserRouter>
           <Switch>
             <Route 
@@ -67,4 +73,5 @@ render() {
     );
   }
 }
+
 export default App;
