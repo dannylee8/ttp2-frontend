@@ -13,13 +13,15 @@ class Signup extends Component {
       errors: ''
     };
   }
-handleChange = (event) => {
+
+  handleChange = (event) => {
     const {name, value} = event.target
     this.setState({
       [name]: value
     })
   };
-handleSubmit = (event) => {
+
+  handleSubmit = (event) => {
     event.preventDefault()
     const {username, email, password, password_confirmation} = this.state
     let user = {
@@ -35,34 +37,38 @@ handleSubmit = (event) => {
         this.redirect()
       } else {
         this.setState({
-          errors: response.data.errors
+          errors: response.data.errors,
+          username: '',
+          email: '',
+          password: '',
+          password_confirmation: ''
         })
       }
     })
     .catch(error => console.log('api errors:', error))
   };
 
-redirect = () => {
+  redirect = () => {
     this.props.history.push('/')
   }
 
-handleErrors = () => {
+  handleErrors = () => {
     return (
       <div>
-        <ul>{this.state.errors.map((error) => {
+        <ul className='error-message'>{this.state.errors.map((error) => {
           return <li key={error}>{error}</li>
         })}</ul> 
       </div>
     )
   }
 
-render() {
+  render() {
     const {username, email, password, password_confirmation} = this.state
     return (
       <div className='center'>
         <div id="login_div">
           <h4>Sign Up</h4>
-          <form class="w3-container" onSubmit={this.handleSubmit}>
+          <form className="w3-container" onSubmit={this.handleSubmit}>
             <input
               placeholder="username"
               className="w3-input w3-border w3-light-grey"
@@ -103,7 +109,8 @@ render() {
               or <Link to='/login'>login</Link>
             </div>
           </form>
-          <div>
+          <br />
+          <div className='error-box'>
             {
               this.state.errors ? this.handleErrors() : null
             }
@@ -113,4 +120,5 @@ render() {
     );
   }
 }
+
 export default Signup;

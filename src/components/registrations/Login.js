@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class Login extends Component {
   constructor(props) {
@@ -14,16 +14,18 @@ class Login extends Component {
   componentWillMount() {
     return this.props.loggedInStatus ? this.redirect() : null
   }
-handleChange = (event) => {
+
+  handleChange = (event) => {
     const {name, value} = event.target
     this.setState({
       [name]: value
     })
   };
-handleSubmit = (event) => {
+
+  handleSubmit = (event) => {
     event.preventDefault()
     const {email, password} = this.state
-let user = {
+    let user = {
       email: email,
       password: password
     }
@@ -41,13 +43,15 @@ let user = {
     })
     .catch(error => console.log('api errors:', error))
   };
-redirect = () => {
+
+  redirect = () => {
     this.props.history.push('/')
   }
-handleErrors = () => {
+
+  handleErrors = () => {
     return (
       <div>
-        <ul>
+        <ul className='error-message'>
         {this.state.errors.map(error => {
         return <li key={error}>{error}</li>
           })
@@ -56,9 +60,10 @@ handleErrors = () => {
       </div>
     )
   }
-render() {
+
+  render() {
     const {email, password} = this.state
-return (
+    return (
       <div className='center'>
         <div id="login_div">
           <h4>Sign In</h4>
@@ -88,7 +93,7 @@ return (
             </div>
             </form>
           </div>
-          <div>
+          <div className='error-box'>
           {
             this.state.errors ? this.handleErrors() : null
           }
@@ -97,4 +102,5 @@ return (
     );
   }
 }
+
 export default Login;
