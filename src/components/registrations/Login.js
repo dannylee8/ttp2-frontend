@@ -11,7 +11,8 @@ class Login extends Component {
       errors: ''
     };
   }
-  componentDidlMount() {
+
+  componentDidUpdate() {
     return this.props.loggedInStatus ? this.redirect() : null
   }
 
@@ -66,7 +67,6 @@ class Login extends Component {
     const {email, password} = this.state
     return (
       <>
-        {console.log("handlesubmit")}
         <div className='top-menu'>
           <span className='logo'>TTP Stock Trade</span>
         </div>

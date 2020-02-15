@@ -1,16 +1,19 @@
-import React from 'react'
+import React, { Component } from 'react';
 
-function RightCol (props) {
-  return (
-    // Portfolio mode, show right column bg color and dividing line
-    <div className={`column ${(props.modeStatus === 'portfolio') ? 'right' : ''}`}>
-      {props.modeStatus === 'portfolio' ? 
-      <div className="cash-balance">
-        Cash Balance: {`$ ${parseFloat(props.user.cash).toFixed(2)}`}
+class RightCol extends Component {
+
+  render() {
+    return (
+      // Portfolio mode, show right column bg color and dividing line
+      <div className={`column ${(this.props.modeStatus === 'portfolio') ? 'right' : ''}`}>
+        {this.props.modeStatus === 'portfolio' ? 
+        <div className="cash-balance">
+          {this.props.userobj ? `Cash Balance: $ ${parseFloat(this.props.userobj.cash).toFixed(2)}` : null}
+        </div>
+        : null}
       </div>
-      : null}
-    </div>
-  )
+    )
+  }
 }
 
 export default RightCol;

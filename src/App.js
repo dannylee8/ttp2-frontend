@@ -20,11 +20,9 @@ class App extends Component {
   }
 
   setMode = (modeText) => {
-    // console.log("App setMode ", modeText)
     this.setState({
       mode: modeText
     })
-    // console.log("setMode: ", this.state.mode)
   }
 
   loginStatus = () => {
@@ -44,10 +42,9 @@ class App extends Component {
   handleLogin = (data) => {
     this.setState({
       isLoggedIn: true,
-      user: data.data.user,
+      user: data.user, 
       mode: 'portfolio'
     })
-    // console.log("App handle-login: ", data.data.user)
   }
 
   handleLogout = () => {
@@ -63,12 +60,6 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route 
-              exact path='/' 
-              render={props => (
-              <Home {...props} handleLogout={this.handleLogout} setMode={this.setMode} user={this.state.user} modeStatus={this.state.mode} loggedInStatus={this.state.isLoggedIn}/>
-              )}
-            />
-            <Route 
               exact path='/login' 
               render={props => (
               <Login {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>
@@ -78,6 +69,12 @@ class App extends Component {
               exact path='/signup' 
               render={props => (
               <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>
+              )}
+            />
+            <Route 
+              path='/' 
+              render={props => (
+              <Home {...props} handleLogout={this.handleLogout} userobj={this.state.user} setMode={this.setMode} modeStatus={this.state.mode} loggedInStatus={this.state.isLoggedIn}/>
               )}
             />
           </Switch>
