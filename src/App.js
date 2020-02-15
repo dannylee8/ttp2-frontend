@@ -11,7 +11,8 @@ class App extends Component {
     this.state = { 
       isLoggedIn: false,
       user: {},
-      mode: ''
+      mode: '',
+      stocks: []
     };
   }
 
@@ -40,10 +41,23 @@ class App extends Component {
   }
 
   handleLogin = (data) => {
-    this.setState({
+    this.setState((prevState, props) => ({
       isLoggedIn: true,
       user: data.user, 
       mode: 'portfolio'
+    }))
+    if (data.user) {
+      this.getUserStocks(data.user.id)
+    }
+  }
+
+  getUserStocks = (id) => {
+    fetch(`http://localhost:3001/users/${id}`)
+    .then (resp => resp.json())
+    .then (json => {
+      this.setState((prevState, props) => ({
+        stocks: json.stocks
+      }))
     })
   }
 
@@ -74,7 +88,7 @@ class App extends Component {
             <Route 
               path='/' 
               render={props => (
-              <Home {...props} handleLogout={this.handleLogout} userobj={this.state.user} setMode={this.setMode} modeStatus={this.state.mode} loggedInStatus={this.state.isLoggedIn}/>
+              <Home {...props} {...this.state} handleLogout={this.handleLogout} userobj={this.state.user} setMode={this.setMode} modeStatus={this.state.mode} loggedInStatus={this.state.isLoggedIn}/>
               )}
             />
           </Switch>
