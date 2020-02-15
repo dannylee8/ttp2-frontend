@@ -11,7 +11,7 @@ class Login extends Component {
       errors: ''
     };
   }
-  componentWillMount() {
+  componentDidlMount() {
     return this.props.loggedInStatus ? this.redirect() : null
   }
 

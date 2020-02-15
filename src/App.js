@@ -42,7 +42,8 @@ class App extends Component {
   handleLogin = (data) => {
     this.setState({
       isLoggedIn: true,
-      user: data.user
+      user: data.user,
+      mode: 'portfolio'
     })
   }
 
