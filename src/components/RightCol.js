@@ -2,9 +2,13 @@ import React from 'react'
 
 function RightCol (props) {
   return (
-    <div className='column right'>
-      {console.log(props.modeStatus)}
-      {props.modeStatus === 'portfolio' ? 'Right' : null}
+    // Portfolio mode, show right column bg color and dividing line
+    <div className={`column ${(props.modeStatus === 'portfolio') ? 'right' : ''}`}>
+      {props.modeStatus === 'portfolio' ? 
+      <div>
+        Cash - 
+      </div>
+      : null}
     </div>
   )
 }

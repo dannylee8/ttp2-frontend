@@ -80,17 +80,16 @@ code {
 
 .column {
   flex: 50%;
+  height: 80vh;
 }
 
 .left {
   background-color: gainsboro;
-  height: 80vh;
   border-radius: 5px;
 }
 
 .right {
   background-color: silver;
-  height: 80vh;
   border-left-style: double;
   border-left:  3px solid darkslategray;
   border-radius: 5px;
