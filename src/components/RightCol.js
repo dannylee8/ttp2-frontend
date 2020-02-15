@@ -48,36 +48,38 @@ class RightCol extends Component {
       // Portfolio mode, show right column bg color and dividing line
       <div className={`column ${(this.props.modeStatus === 'portfolio') ? 'right' : ''}`}>
         {this.props.modeStatus === 'portfolio' ? 
-        <div className="cash-balance">
-          {this.props.userobj ? `Cash Balance: $ ${commaNumber(parseFloat(this.props.userobj.cash).toFixed(2))}` : null}
-        </div>
-        : null}
-        <br />
-        <div>
-          <form className="w3-container stock-form" onSubmit={this.handleSubmit}>
-            <input
-              placeholder="Ticker symbol"
-              className="w3-input w3-border w3-light-grey"
-              type="text"
-              name="ticker"
-              value={ticker}
-              onChange={this.handleChange}
-            />
-            <br />
-            <input
-                placeholder="Quantity"
+        <>
+          <div className="cash-balance">
+            Cash Balance: $ {this.props.userobj ? `${commaNumber(parseFloat(this.props.userobj.cash).toFixed(2))}` : null}
+          </div>
+          <br />
+          <div>
+            <form className="w3-container stock-form" onSubmit={this.handleSubmit}>
+              <input
+                placeholder="Ticker symbol"
                 className="w3-input w3-border w3-light-grey"
                 type="text"
-                name="quantity"
-                value={quantity}
+                name="ticker"
+                value={ticker}
                 onChange={this.handleChange}
-            />
-            <br />
-            <button className="w3-btn w3-round-large w3-blue-grey" placeholder="submit" type="submit">
-              Buy
-            </button>
-          </form>
-        </div>
+              />
+              <br />
+              <input
+                  placeholder="Quantity"
+                  className="w3-input w3-border w3-light-grey"
+                  type="text"
+                  name="quantity"
+                  value={quantity}
+                  onChange={this.handleChange}
+              />
+              <br />
+              <button className="w3-btn w3-round-large w3-blue-grey" placeholder="submit" type="submit">
+                Buy
+              </button>
+            </form>
+          </div>
+        </>
+        : null}
       </div>
     )
   }
