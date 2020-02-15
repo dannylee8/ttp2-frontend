@@ -65,58 +65,63 @@ class Signup extends Component {
   render() {
     const {username, email, password, password_confirmation} = this.state
     return (
-      <div className='center'>
-        <div id="login_div">
-          <h4>Sign Up</h4>
-          <form className="w3-container" onSubmit={this.handleSubmit}>
-            <input
-              placeholder="username"
-              className="w3-input w3-border w3-light-grey"
-              type="text"
-              name="username"
-              value={username}
-              onChange={this.handleChange}
-            />
-            <input
-              placeholder="email"
-              className="w3-input w3-border w3-light-grey"
-              type="text"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-            />
-            <input 
-              placeholder="password"
-              className="w3-input w3-border w3-light-grey"
-              type="password"
-              name="password"
-              value={password}
-              onChange={this.handleChange}
-            />
-            <input
-              placeholder="password confirmation"
-              className="w3-input w3-border w3-light-grey"
-              type="password"
-              name="password_confirmation"
-              value={password_confirmation}
-              onChange={this.handleChange}
-            />
-          
-            <button className="w3-btn w3-blue-grey" placeholder="submit" type="submit">
-              Sign Up
-            </button>
-            <div>
-              or <Link to='/login'>login</Link>
-            </div>
-          </form>
-          <br />
+      <>
+        <div className='top-menu'>
+            <span className='logo'>TTP Stock Trade</span>
+        </div>
+        <div className='center'>
+          <div id="login_div">
+            <h4>Register</h4>
+            <form className="w3-container" onSubmit={this.handleSubmit}>
+              <input
+                placeholder="username"
+                className="w3-input w3-border w3-light-grey"
+                type="text"
+                name="username"
+                value={username}
+                onChange={this.handleChange}
+              />
+              <input
+                placeholder="email"
+                className="w3-input w3-border w3-light-grey"
+                type="text"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+              />
+              <input 
+                placeholder="password"
+                className="w3-input w3-border w3-light-grey"
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+              />
+              <input
+                placeholder="password confirmation"
+                className="w3-input w3-border w3-light-grey"
+                type="password"
+                name="password_confirmation"
+                value={password_confirmation}
+                onChange={this.handleChange}
+              />
+            
+              <button className="w3-btn w3-round-large w3-blue-grey" placeholder="submit" type="submit">
+                Sign Up
+              </button>
+              <div>
+                or <Link to='/login'>login</Link>
+              </div>
+            </form>
+            <br />
+          </div>
           <div className='error-box'>
             {
               this.state.errors ? this.handleErrors() : null
             }
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

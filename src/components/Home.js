@@ -7,7 +7,7 @@ const Home = (props) => {
     axios.delete('http://localhost:3001/logout', { withCredentials: true })
       .then(response => {
         props.handleLogout()
-        props.history.push('/')
+        props.history.push('/login')
       })
       .catch(error => console.log(error))
   }
@@ -15,17 +15,22 @@ const Home = (props) => {
   return (
     <div>
       <div className='top-menu'>
-        {props.loggedInStatus ? null : 
-          <div>
-            <Link to='/login'>Log In</Link>
-            <br />
-            <Link to='/signup'>Sign Up</Link> 
-          </div>
-        }
-        { props.loggedInStatus ? <Link to='/logout' onClick={handleClick}><button type="button" class="btn btn-default btn-sm">
-          <span class="glyphicon glyphicon-log-out"></span> Log Out
-        </button></Link> : null }
+        <span className='logo'>TTP Stock Trade</span>
+        { props.loggedInStatus ? <Link to='/logout' onClick={handleClick}><button type="button" className="w3-btn w3-round-large w3-blue-grey">
+          <span className="glyphicon glyphicon-log-out"></span> Log Out </button></Link> : null }
       </div>
+      {props.loggedInStatus ? 
+        <div className='row'>
+          <div className='column left'>
+              Left
+          </div>
+          <div className='column right'>
+              Right
+          </div>
+        </div>
+        :
+        null
+      }
     </div>
   )
 };

@@ -25,6 +25,8 @@ code {
   background-color:white;
   padding:20px;
   width: 40vw;
+  border-radius: 5px;
+  border: 1px dotted gainsboro;
 }
 
 #login_div button {
@@ -53,17 +55,49 @@ code {
 }
 
 .error-message {
-  color: red;
+  color: #FF5733;
   margin: 0;
   padding: 0;
   list-style-type: none;
   text-align: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .9em;
 }
 
 .error-box {
   height: 100px;
+  padding: 10px;
 }
 
 .top-menu {
   text-align: right;
+  padding: 20px 10px;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+
+.left {
+  background-color: gainsboro;
+  height: 80vh;
+  border-radius: 5px;
+}
+
+.right {
+  background-color: silver;
+  height: 80vh;
+  border-left-style: double;
+  border-left:  3px solid darkslategray;
+  border-radius: 5px;
+}
+
+.logo {
+  float: left;
+  font-size: 1.5em;
+  font-weight: bold
 }
