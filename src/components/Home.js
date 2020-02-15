@@ -10,8 +10,8 @@ const Home = (props) => {
       <TopMenu {...props} setMode={props.setMode} loggedInStatus={props.loggedInStatus} />
       {props.loggedInStatus ? 
         <div className='row'>
-          <LeftCol modeStatus={props.modeStatus} />
-          <RightCol modeStatus={props.modeStatus} />
+          <LeftCol {...props} user={props.user} modeStatus={props.modeStatus} />
+          <RightCol {...props} user={props.user} modeStatus={props.modeStatus} />
         </div>
         : null}
     </div>

@@ -36,21 +36,24 @@ class App extends Component {
         this.handleLogout()
       }
     })
-    .catch(error => console.log('api errors:', error))
+    .catch(error =>{
+      console.log('api errors:', error)
+    })
   }
 
   handleLogin = (data) => {
     this.setState({
       isLoggedIn: true,
-      user: data.user,
+      user: data.data.user,
       mode: 'portfolio'
     })
+    // console.log("App handle-login: ", data.data.user)
   }
 
   handleLogout = () => {
     this.setState({
-    isLoggedIn: false,
-    user: {}
+      isLoggedIn: false,
+      user: {}
     })
   }
 
@@ -62,7 +65,7 @@ class App extends Component {
             <Route 
               exact path='/' 
               render={props => (
-              <Home {...props} handleLogout={this.handleLogout} setMode={this.setMode} modeStatus={this.state.mode} loggedInStatus={this.state.isLoggedIn}/>
+              <Home {...props} handleLogout={this.handleLogout} setMode={this.setMode} user={this.state.user} modeStatus={this.state.mode} loggedInStatus={this.state.isLoggedIn}/>
               )}
             />
             <Route 
