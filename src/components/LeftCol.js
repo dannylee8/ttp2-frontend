@@ -1,9 +1,10 @@
 import React from 'react'
 
-function LeftCol () {
+function LeftCol (props) {
   return (
     <div className='column left'>
-      Left
+      {console.log(props.modeStatus)}
+      {props.modeStatus === 'transactions' ? 'Left' : null}
     </div>
   )
 }

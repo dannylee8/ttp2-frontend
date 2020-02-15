@@ -1,9 +1,10 @@
 import React from 'react'
 
-function RightCol () {
+function RightCol (props) {
   return (
     <div className='column right'>
-      Right
+      {console.log(props.modeStatus)}
+      {props.modeStatus === 'portfolio' ? 'Right' : null}
     </div>
   )
 }
