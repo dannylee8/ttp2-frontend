@@ -130,3 +130,10 @@ code {
   background-color: #4CAF50;
   color: white;
 }
+
+.stock-form input {
+  width: 50%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}

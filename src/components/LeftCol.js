@@ -6,6 +6,8 @@ var commaNumber = require('comma-number')
 function LeftCol (props) {
   return (
     <div className='column left'>
+      <br />
+      <br />
       {props.modeStatus === 'transactions' ? 'Left' : null}
       <h2>Portfolio (${commaNumber(props.portfolioValue)})</h2>
       <table id='stocks'>
