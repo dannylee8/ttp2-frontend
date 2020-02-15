@@ -10,15 +10,24 @@ class App extends Component {
     super(props);
     this.state = { 
       isLoggedIn: false,
-      user: {}
+      user: {},
+      mode: ''
     };
   }
 
-componentDidMount() {
+  componentDidMount() {
     this.loginStatus()
   }
 
-loginStatus = () => {
+  setMode = (modeText) => {
+    // console.log("App setMode ", modeText)
+    this.setState({
+      mode: modeText
+    })
+    // console.log("setMode: ", this.state.mode)
+  }
+
+  loginStatus = () => {
     axios.get('http://localhost:3001/logged_in', {withCredentials: true})
     .then(response => {
       if (response.data.logged_in) {
@@ -30,21 +39,21 @@ loginStatus = () => {
     .catch(error => console.log('api errors:', error))
   }
 
-handleLogin = (data) => {
+  handleLogin = (data) => {
     this.setState({
       isLoggedIn: true,
       user: data.user
     })
   }
 
-handleLogout = () => {
+  handleLogout = () => {
     this.setState({
     isLoggedIn: false,
     user: {}
     })
   }
 
-render() {
+  render() {
     return (
       <div id='wrapper'>
         <BrowserRouter>
@@ -52,7 +61,7 @@ render() {
             <Route 
               exact path='/' 
               render={props => (
-              <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>
+              <Home {...props} handleLogout={this.handleLogout} setMode={this.setMode} loggedInStatus={this.state.isLoggedIn}/>
               )}
             />
             <Route 
