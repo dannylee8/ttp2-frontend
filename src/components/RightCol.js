@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+var commaNumber = require('comma-number')
 
 class RightCol extends Component {
 
@@ -8,7 +9,7 @@ class RightCol extends Component {
       <div className={`column ${(this.props.modeStatus === 'portfolio') ? 'right' : ''}`}>
         {this.props.modeStatus === 'portfolio' ? 
         <div className="cash-balance">
-          {this.props.userobj ? `Cash Balance: $ ${parseFloat(this.props.userobj.cash).toFixed(2)}` : null}
+          {this.props.userobj ? `Cash Balance: $ ${commaNumber(parseFloat(this.props.userobj.cash).toFixed(2))}` : null}
         </div>
         : null}
       </div>

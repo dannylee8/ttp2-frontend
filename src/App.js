@@ -12,7 +12,8 @@ class App extends Component {
       isLoggedIn: false,
       user: {},
       mode: '',
-      stocks: []
+      stocks: [],
+      portfolioValue: 0
     };
   }
 
@@ -56,7 +57,8 @@ class App extends Component {
     .then (resp => resp.json())
     .then (json => {
       this.setState((prevState, props) => ({
-        stocks: json.stocks
+        stocks: json.stocks,
+        portfolioValue: json.portfolio_value
       }))
     })
   }
