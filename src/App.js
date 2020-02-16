@@ -13,7 +13,8 @@ class App extends Component {
       user: {},
       mode: '',
       stocks: [],
-      portfolioValue: 0
+      portfolioCost: 0,
+      portfolioCurrentValue: 0
     };
   }
 
@@ -58,7 +59,8 @@ class App extends Component {
     .then (json => {
       this.setState((prevState, props) => ({
         stocks: json.stocks,
-        portfolioValue: json.portfolio_value
+        portfolioCost: json.portfolio_cost,
+        portfolioCurrentValue: json.portfolio_current_value
       }))
     })
   }

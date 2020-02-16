@@ -7,15 +7,18 @@ var commaNumber = require('comma-number')
 function LeftCol (props) {
   return (
     <div className='column left'>
+      {console.log(props)}
       <br />
       <br />
       {props.modeStatus === 'portfolio' ? 
       <>
-        <h2>Portfolio (${commaNumber(props.portfolioValue)})</h2>
+        <h2>Portfolio</h2>
+        <h4>Current value: ${commaNumber(props.portfolioCurrentValue.toFixed(2))}</h4>
+        <h4>Portfolio Cost: ${commaNumber(props.portfolioCost)}</h4>
         <table id='stocks'>
           <tbody>
             {props.stocks.map((s) => { 
-              return <SingleStock key={s.id} symbol={s.symbol} shares={s.shares} price={s.price} />
+              return <SingleStock key={s.id} symbol={s.symbol} shares={s.shares} price={s.current_price} />
             })}
           </tbody>
         </table>
