@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 var commaNumber = require('comma-number')
 
 class RightCol extends Component {
