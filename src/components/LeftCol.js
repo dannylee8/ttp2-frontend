@@ -17,7 +17,7 @@ function LeftCol (props) {
         <table id='stocks'>
           <tbody>
             {props.stocks.map((s) => { 
-              return <SingleStock key={s.id} symbol={s.symbol} shares={s.shares} price={s.current_price} />
+              return <SingleStock key={s.id} symbol={s.symbol} shares={s.shares} currentPrice={s.current_price} openPrice={s.openPrice}/>
             })}
           </tbody>
         </table>
