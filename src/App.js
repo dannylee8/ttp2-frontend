@@ -35,6 +35,12 @@ class App extends Component {
     })
   }
 
+  updateStocks = (stock, latestPrice) => {
+    this.setState({
+      stocks: [...this.state.stocks, { ...stock, current_price: latestPrice } ]
+    })
+  }
+
   loginStatus = () => {
     axios.get('http://localhost:3001/logged_in', {withCredentials: true})
     .then(response => {
@@ -99,7 +105,7 @@ class App extends Component {
             <Route 
               path='/' 
               render={props => (
-              <Home {...props} {...this.state} updateUser={this.updateUser} handleLogout={this.handleLogout} userobj={this.state.user} setMode={this.setMode} modeStatus={this.state.mode} loggedInStatus={this.state.isLoggedIn}/>
+              <Home {...props} {...this.state} updateUser={this.updateUser} updateStocks={this.updateStocks} handleLogout={this.handleLogout} userobj={this.state.user} setMode={this.setMode} modeStatus={this.state.mode} loggedInStatus={this.state.isLoggedIn}/>
               )}
             />
           </Switch>

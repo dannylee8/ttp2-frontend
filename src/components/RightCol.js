@@ -37,6 +37,22 @@ class RightCol extends Component {
     .then(json => {
       this.props.updateUser(json.user)
     })
+    fetch(`http://localhost:3001/stocks`, {
+      method: "POST",
+      headers: HEADERS,
+      body: JSON.stringify({
+        symbol: ticker.toUpperCase(),
+        shares: quantity,
+        price: latestPrice,
+        user_id: userID
+      })
+    })
+    .then(resp => resp.json())
+    .then(json => {
+      console.log(json)
+      console.log(this.props)
+      this.props.updateStocks(json.stock, latestPrice)
+    })
   }
 
   handleSubmit = (event) => {
