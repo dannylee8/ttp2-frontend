@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 
 var commaNumber = require('comma-number')
+
+const HEADERS = {
+  "content-type": "application/json",
+  "accept"      : "application/json"
+}
 
 class RightCol extends Component {
 
@@ -19,31 +25,66 @@ class RightCol extends Component {
     })
   };
 
+  placeOrder(userID, newBalance, ticker, quantity, latestPrice) {
+    fetch(`http://localhost:3001/users/${userID}`, {
+      method: "PATCH",
+      headers: HEADERS,
+      body: JSON.stringify({
+        cash: newBalance
+      })
+    })
+    .then(resp => resp.json())
+    .then(json => {
+      this.props.updateUser(json.user)
+    })
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
     const {ticker, quantity} = this.state
-    console.log(ticker, quantity)
-    // let user = {
-    //   email: email,
-    //   password: password
-    // }
-    // axios.post('http://localhost:3001/login', {user}, {withCredentials: true})
-    // .then(response => {
-    //   if (response.data.logged_in) {
-    //     this.props.handleLogin(response.data)
-    //     this.redirect()
-    //   } else {
-    //     this.setState({
-    //       errors: response.data.errors,
-    //       email: '',
-    //       password: ''
-    //     })
-    //   }
-    // })
-    // .catch(error => console.log('api errors:', error))
+
+    // check for completed form inputs
+    if (!ticker) {
+      alert("Please enter a valid stock ticker symbol.")
+      return
+    }
+    // positive, integers only
+    if (!quantity || !Number.isInteger(Number(quantity)) || quantity < 0) {
+      alert("Please enter quantity of shares")
+      return
+    }
+
+    axios.get(`https://sandbox.iexapis.com/stable/stock/${ticker}/quote?token=Tpk_f60d00f3b3774527b14ddc2510d54b18`)
+    .then(response => {
+      if (response.data.symbol) {
+        let orderCost = (response.data.latestPrice * quantity).toFixed(2)
+        let newBalance = this.props.user.cash - orderCost
+        if (newBalance > 0 ) {
+          this.setState({
+            ticker: '',
+            quantity: ''
+          })
+          this.placeOrder(this.props.user.id, newBalance, ticker, quantity, response.data.latestPrice)
+        } else {
+          alert("Insufficient funds")
+          return
+        }
+      } else {
+        this.setState({
+          errors: 'no such ticker',
+          ticker: '',
+          quantity: ''
+        })
+      }
+    })
+    .catch(error => {
+      console.log('api errors:', error)
+      alert('Please enter a valid stock ticker symbol')
+    })
   };
 
   render() {
+    console.log(this.props)
     const {ticker, quantity} = this.state
     return (
       // Portfolio mode, show right column bg color and dividing line

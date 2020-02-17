@@ -9,6 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
+      loading: true, 
       isLoggedIn: false,
       user: {},
       mode: '',
@@ -28,11 +29,17 @@ class App extends Component {
     })
   }
 
+  updateUser = (user) => {
+    this.setState({
+      user: user
+    })
+  }
+
   loginStatus = () => {
     axios.get('http://localhost:3001/logged_in', {withCredentials: true})
     .then(response => {
       if (response.data.logged_in) {
-        this.handleLogin(response)
+        this.handleLogin(response.data)
       } else {
         this.handleLogout()
       }
@@ -92,7 +99,7 @@ class App extends Component {
             <Route 
               path='/' 
               render={props => (
-              <Home {...props} {...this.state} handleLogout={this.handleLogout} userobj={this.state.user} setMode={this.setMode} modeStatus={this.state.mode} loggedInStatus={this.state.isLoggedIn}/>
+              <Home {...props} {...this.state} updateUser={this.updateUser} handleLogout={this.handleLogout} userobj={this.state.user} setMode={this.setMode} modeStatus={this.state.mode} loggedInStatus={this.state.isLoggedIn}/>
               )}
             />
           </Switch>

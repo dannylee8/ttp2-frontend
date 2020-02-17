@@ -20,7 +20,7 @@ class Home extends Component {
         {this.props.loggedInStatus ? 
           <div className='row'>
             <LeftCol {...this.props} userobj={this.props.userobj} modeStatus={this.props.modeStatus} />
-            <RightCol {...this.props} userobj={this.props.userobj} modeStatus={this.props.modeStatus} />
+            <RightCol {...this.props} updateUser={this.props.updateUser} userobj={this.props.userobj} modeStatus={this.props.modeStatus} />
           </div>
           : null}
       </div>
