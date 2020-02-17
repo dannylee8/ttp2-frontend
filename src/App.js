@@ -75,6 +75,26 @@ class App extends Component {
         portfolioCost: json.portfolio_cost,
         portfolioCurrentValue: json.portfolio_current_value
       }))
+      
+      let symbolList = json.stocks.map(s => s.symbol).join(',')
+
+      axios.get(`https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbolList}&types=ohlc&token=Tpk_f60d00f3b3774527b14ddc2510d54b18`)
+      .then(response => {
+        // response contains OHLC data for each stock in our users portfolio
+
+        for (var key in response.data) {
+          // response.data[key].ohlc.open.price is the number we're looking for
+          let k = key   // assigning k to key to clear 'no-loop-func' eslint 
+          let stockInState = this.state.stocks.find(s => s.symbol === k) // stock obj we are iterating on
+          let filteredState = this.state.stocks.filter(s => s.symbol !== k) // all others in the stocks array
+          let openPrice = response.data[key].ohlc.open.price // the open price
+
+          // set the state, using spread oeprator to add a new value to stock obj
+          this.setState({
+            stocks: [...filteredState, { ...stockInState, openPrice: openPrice  } ]
+          })
+        }
+      })
     })
   }
 

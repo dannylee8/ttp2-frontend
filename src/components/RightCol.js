@@ -49,8 +49,6 @@ class RightCol extends Component {
     })
     .then(resp => resp.json())
     .then(json => {
-      console.log(json)
-      console.log(this.props)
       this.props.updateStocks(json.stock, latestPrice)
     })
   }
@@ -100,7 +98,7 @@ class RightCol extends Component {
   };
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     const {ticker, quantity} = this.state
     return (
       // Portfolio mode, show right column bg color and dividing line
