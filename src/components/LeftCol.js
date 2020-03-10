@@ -6,7 +6,7 @@ var commaNumber = require('comma-number')
 
 function LeftCol (props) {
   return (
-    <div className='column left'>
+    <div className={props.loading ? "column left fade-out" : "column left"}>
       <br />
       <br />
       {props.modeStatus === 'portfolio' ? 

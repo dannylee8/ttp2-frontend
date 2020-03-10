@@ -56,7 +56,6 @@ class RightCol extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     const {ticker, quantity} = this.state
-
     // check for completed form inputs
     if (!ticker) {
       alert("Please enter a valid stock ticker symbol.")
@@ -67,18 +66,20 @@ class RightCol extends Component {
       alert("Please enter quantity of shares")
       return
     }
-
+  
+    // axios.get(`https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=pk_9b7b0939edbc416e8ecee6a94c193697`)
     axios.get(`https://sandbox.iexapis.com/stable/stock/${ticker}/quote?token=Tpk_f60d00f3b3774527b14ddc2510d54b18`)
     .then(response => {
       if (response.data.symbol) {
         let orderCost = (response.data.latestPrice * quantity).toFixed(2)
         let newBalance = this.props.user.cash - orderCost
         if (newBalance > 0 ) {
+          // Had these two lines reversed, so state was getting reset before the order was sent out
+          this.placeOrder(this.props.user.id, newBalance, ticker, quantity, response.data.latestPrice)
           this.setState({
             ticker: '',
             quantity: ''
           })
-          this.placeOrder(this.props.user.id, newBalance, ticker, quantity, response.data.latestPrice)
         } else {
           alert("Insufficient funds")
           return
@@ -93,6 +94,11 @@ class RightCol extends Component {
     })
     .catch(error => {
       console.log('api errors:', error)
+      // clear state in the case we have an invalid ticker symbol
+      this.setState({
+        ticker: '',
+        quantity: ''
+      })
       alert('Please enter a valid stock ticker symbol')
     })
   };
@@ -102,7 +108,9 @@ class RightCol extends Component {
     const {ticker, quantity} = this.state
     return (
       // Portfolio mode, show right column bg color and dividing line
-      <div className={`column ${(this.props.modeStatus === 'portfolio') ? 'right' : ''}`}>
+      <div className={`column ${(this.props.modeStatus === 'portfolio' && this.props.loading) ? 'right fade-out' 
+        : this.props.modeStatus === 'portfolio' ? 'right' 
+        : ''}`}>
         {this.props.modeStatus === 'portfolio' ? 
         <>
           <div className="cash-balance">
