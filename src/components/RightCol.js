@@ -51,7 +51,8 @@ class RightCol extends Component {
         this.props.updateUser(json.user)
       })
 
-      this.props.updateStocks(json.stock, latestPrice)
+      // this.props.updateStocks(json.stock, latestPrice)
+      this.props.getUserStocks(userID)
     })
   }
 

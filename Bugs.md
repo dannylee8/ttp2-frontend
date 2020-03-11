@@ -18,4 +18,5 @@ NoFix: Not ideal - but this is expected because openPrice is calculated on Load.
 
 Error: Order is added to database but does not show up in portfolio if stock already exists in portfolio.
 Missed Feature: Only shows a symbol once even if there are multiple orders.
-
+Fix: Update stocks_controller.rb so that if user already has stock with the same symbol, the shares are added to that object. 
+    Instead of updating state from RightCol.js, getUserStocks() is passed down from App.js and used to reload the state from the database.
